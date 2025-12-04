@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-rates = pd.read_excel("../estv_income_rates.xlsx", header=3)
-sc_f = pd.read_excel("../estv_scales_fed.xlsx", header=5)
-sc_c = pd.read_excel("../estv_scales_zh.xlsx", header=5)
+rates = pd.read_excel("estv_income_rates.xlsx", header=3)
+sc_f = pd.read_excel("estv_scales_fed.xlsx", header=5)
+sc_c = pd.read_excel("estv_scales_zh.xlsx", header=5)
 
 
 st.write("# Income tax estimation Switzerland-Liechtenstein DBA")
@@ -80,7 +80,7 @@ total_ch = c_tax + g_tax + f_tax
 st.markdown(f"- Total: CHF {total_ch:.2f}")
 
 
-sc_li = pd.read_excel("../tax_li.xlsx", sheet_name="Sheet2")
+sc_li = pd.read_excel("tax_li.xlsx", sheet_name="Sheet2")
 
 
 st.write("## Liechtenstein ")
