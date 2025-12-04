@@ -2,11 +2,12 @@ import streamlit as st
 import pandas as pd
 import os
 
-print("FILES IN DIRECTORY:", os.listdir(os.path.dirname(__file__)))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # robust, funktioniert überall
 
-rates = pd.read_excel("estv_income_rates.xlsx", header=3)
-sc_f = pd.read_excel("estv_scales_fed.xlsx", header=5)
-sc_c = pd.read_excel("estv_scales_zh.xlsx", header=5)
+
+rates = pd.read_excel(os.path.join(BASE_DIR, "estv_income_rates.xlsx"), header=3)
+sc_f = pd.read_excel(os.path.join(BASE_DIR, "estv_scales_fed.xlsx"), header=5)
+sc_c = pd.read_excel(os.path.join(BASE_DIR, "estv_scales_zh.xlsx"), header=5)
 
 
 st.write("# Income tax estimation Switzerland-Liechtenstein DBA")
@@ -83,27 +84,18 @@ total_ch = c_tax + g_tax + f_tax
 st.markdown(f"- Total: CHF {total_ch:.2f}")
 
 
-sc_li = pd.read_excel("tax_li.xlsx", sheet_name="Sheet2")
+sc_li = pd.read_excel(os.path.join(BASE_DIR, "tax_li.xlsx"), sheet_name="Sheet2")
 
 
 st.write("## Liechtenstein ")
 tax_in_li = int(st.text_input("Taxable income", value="100000"))
 
-
-
 row = sc_li[((sc_li['from'] <= tax_in_li) & (tax_in_li <= sc_li['to'])) | (( sc_li['from'] <= tax_in_li) & sc_li['to'].isna())]
 rate = row['rate'].values[0]
 minus = row['minus'].values[0]
 tax_li_land = rate * tax_in_li - minus
-
-
-
 tax_li_gemeinde = tax_li_land * 1.5
-
-
 total_li = tax_li_land + tax_li_gemeinde
-
-
 
 st.write("Taxes when working 100% in Liechtenstein:")
 st.markdown(f"- Landessteuer: CHF {tax_li_land:.2f}")
