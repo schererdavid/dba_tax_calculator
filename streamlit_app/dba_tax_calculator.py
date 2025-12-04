@@ -164,11 +164,11 @@ if nichtrueckkehrtage >= 45:
     st.write(f"Total taxes (monthly): CHF {total_taxes/12:.2f}")
 
     if tax_li + tax_ch_method_ch > 1:
-        st.write(f"Since {100*tax_li:.2f}% + {100*tax_ch_method_ch:.2}% > 100% you will be doppelbesteuert.")
+        st.write(f"Since {100*tax_li:.2f}% + {100*tax_ch_method_ch:.2f}% > 100% you will be doppelbesteuert.")
     elif tax_li + tax_ch_method_ch == 1:
-        st.write(f"Since {100*tax_li:.2f}% + {100*tax_ch_method_ch:.2}% = 100% both calculation methods end up with the same result.")
+        st.write(f"Since {100*tax_li:.2f}% + {100*tax_ch_method_ch:.2f}% = 100% both calculation methods end up with the same result.")
     else:
-        st.write(f"Since {100*tax_li:.2f}% + {100*tax_ch_method_ch:.2}% < 100% some of your income will not be taxed at all.")
+        st.write(f"Since {100*tax_li:.2f}% + {100*tax_ch_method_ch:.2f}% < 100% some of your income will not be taxed at all.")
 
     personal_tax_rate = (total_taxes / ((tax_in_li + ((tax_in_c + tax_in_f) / 2)) / 2)) * 100
     st.write(f"Personal tax rate based on average taxable income (CH/LI): {personal_tax_rate:.2f}%",)
