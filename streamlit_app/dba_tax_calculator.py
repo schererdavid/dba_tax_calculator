@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+import os
+
+print("FILES IN DIRECTORY:", os.listdir(os.path.dirname(__file__)))
 
 rates = pd.read_excel("estv_income_rates.xlsx", header=3)
 sc_f = pd.read_excel("estv_scales_fed.xlsx", header=5)
